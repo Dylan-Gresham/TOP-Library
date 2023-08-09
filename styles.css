@@ -1,14 +1,67 @@
 :root {
     --background-main: #242424;
     --background-sub: #121212;
+    --border-color: #363636;
+    --background-inner: #bb86fc;
 }
 
 * {
+    font-family: "Roboto", sans-serif, system-ui;
     font-size: 12px;
     background-color: var(--background-main);
+    color: white;
 }
 
 body {
     margin: 0;
     padding: 0;
+}
+
+button, a {
+    cursor: pointer;
+}
+
+button:hover,
+button:focus {
+    transform: translateY(-0.25em);
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-rows: 1fr 3fr 1fr;
+}
+
+.container > .navBar {
+    grid-row: 1;
+    grid-column: 1 / span 3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--background-sub);
+    padding: 0 1rem;
+}
+
+.container > .navBar > p,
+.container > .navBar > .navButtons,
+.container > .navBar > .navButtons button {
+    background-color: inherit;
+}
+
+.container > .navBar > p {
+    font-size: 24px;
+}
+
+.container > .navBar > .navButtons {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+.container > .navBar > .navButtons button {
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 18px;
+    background-color: var(--background-inner);
+    color: var(--border-color);
 }
