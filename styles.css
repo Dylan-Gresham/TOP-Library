@@ -1,0 +1,14 @@
+:root {
+    --background-main: #242424;
+    --background-sub: #121212;
+}
+
+* {
+    font-size: 12px;
+    background-color: var(--background-main);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
