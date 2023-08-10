@@ -42,6 +42,19 @@ button:focus {
     position: relative;
 }
 
+.container > #top,
+.container > #bottom {
+    z-index: -100;
+}
+
+.container > #top {
+    grid-row: 1;
+}
+
+.container > #bottom {
+    grid-row: -1;
+}
+
 .container > .navBar {
     grid-row: 1;
     grid-column: 1 / span 3;
