@@ -86,7 +86,7 @@ newButton.addEventListener('click', event => {
         pages = pages.trim();
     }
 
-    while(+pages === NaN || pages === undefined || pages === "") {
+    while(isNaN(pages) || pages === undefined || pages === "") {
         pages = prompt(`How many pages are in ${title}?`);
         if(pages === null) {
             return;
