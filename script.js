@@ -113,4 +113,12 @@ newButton.addEventListener('click', event => {
 
     let newBook = new Book(title, author, pages, completed);
     addBookToLibrary(newBook);
+
+    event.stopPropagation();
+});
+
+clearButton.addEventListener('click', event => {
+    tableBody.replaceChildren();
+
+    event.stopPropagation();
 });
