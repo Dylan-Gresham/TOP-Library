@@ -23,9 +23,9 @@
             <button type="button" class="scrollButton" onclick="document.getElementById('top').scrollIntoView();">Scroll to Top</button>
             <button type="button" class="scrollButton" onclick="document.getElementById('bottom').scrollIntoView()">Scroll to Bottom</button>
             <div class="navButtons">
-                <button type="button" class="navButton">New</button>
-                <button type="button" class="navButton">Delete</button>
-                <button type="button" class="navButton">Clear</button>
+                <button type="button" class="navButton" id="new">New</button>
+                <button type="button" class="navButton" id="delete">Delete</button>
+                <button type="button" class="navButton" id="clear">Clear</button>
             </div>
         </div>
         <div class="sidebar left">
@@ -44,7 +44,7 @@
                         <th>Finished?</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tbody">
                 </tbody>
             </table>
         </div>
