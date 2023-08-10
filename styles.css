@@ -35,10 +35,10 @@ button:focus {
 .container {
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
-    grid-template-rows: 1fr 3fr 0.05fr;
+    grid-template-rows: 0.5fr 3.45fr 0.05fr;
     row-gap: 1rem;
     width: 100%;
-    height: 100%;
+    height: 99%;
     position: relative;
 }
 
@@ -144,10 +144,13 @@ button:focus {
     grid-row: -1;
     justify-self: center;
     align-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding-bottom: 0.25rem;
 }
 
 .container > .footer > .footerButton {
     border: none;
-    align-self: center;
-    justify-self: center;
 }
