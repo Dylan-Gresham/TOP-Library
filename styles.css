@@ -166,7 +166,36 @@ button:focus {
 
 .container > .booksContainer > .booksTable > tbody td {
     padding: 6px;
-    text-align: left;
+    font-size: 14px;
+}
+
+.container > .booksContainer > .booksTable > tbody tr td > input[type="checkbox"].readButton {
+    appearance: none;
+    border: 2px solid var(--border-color);
+    outline: none;
+    height: 1.5rem;
+    width: 1.5rem;
+    cursor: pointer;
+    background-color: inherit;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    border-radius: 3px;
+    display: grid;
+    place-content: center;
+}
+
+.container > .booksContainer > .booksTable > tbody tr td > input[type="checkbox"].readButton::before {
+    content: "";
+    width: 0.8rem;
+    height: 0.8rem;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--background-inner);
+}
+
+.container > .booksContainer > .booksTable > tbody tr td > input[type="checkbox"].readButton:checked::before {
+    transform: scale(1);
 }
 
 .container > .footer {

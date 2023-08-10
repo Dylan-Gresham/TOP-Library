@@ -29,11 +29,29 @@ function addBookToLibrary(book) {
     newPages.textContent = book.pages;
 
     const newRead = document.createElement('td');
-    if(book.read === 'true') {
-        newRead.textContent = 'Yes';
+    const newCheckButton = document.createElement('input');
+    newCheckButton.type = "checkbox";
+    newCheckButton.classList.add('readButton');
+    
+    newCheckButton.addEventListener('click', event => {
+        let i = newCheckButton.parentElement.parentElement.rowIndex - 1;
+        if(library[i].read === true) {
+            library[i].read = false;
+        } else {
+            library[i].read = true;
+        }
+
+        event.stopPropagation();
+
+        return;
+    });
+
+    if(book.read === true) {
+        newCheckButton.checked = true;
     } else {
-        newRead.textContent = 'No';
+        newCheckButton.checked = false;
     }
+    newRead.appendChild(newCheckButton);
 
     // Add table cells to table row
     newRow.appendChild(newTitle);
@@ -131,6 +149,11 @@ newButton.addEventListener('click', event => {
         } else {
             completed = completed.trim();
         }
+    }
+    if(completed === 'true') {
+        completed = true;
+    } else {
+        completed = false;
     }
 
     // Create the new book
