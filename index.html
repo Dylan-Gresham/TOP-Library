@@ -11,14 +11,41 @@
 </head>
 <body>
     <div class="container">
+        <div id="top" style="grid-row: 1; z-index: -100;"></div>
         <div class="navBar">
             <p>Library</p>
+            <button class="scrollButton" onclick="document.getElementById('top').scrollIntoView();">Scroll to Top</button>
+            <button class="scrollButton" onclick="document.getElementById('bottom').scrollIntoView()">Scroll to Bottom</button>
             <div class="navButtons">
                 <button class="navButton">New</button>
                 <button class="navButton">Delete</button>
                 <button class="navButton">Clear</button>
             </div>
         </div>
+        <div class="sidebar left">
+
+        </div>
+        <div class="sidebar right">
+
+        </div>
+        <div class="booksContainer">
+            <table class="booksTable">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Pages</th>
+                        <th>Finished?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="footer">
+            <button class="footerButton"><a href="https://github.com/DylanGresham" target="_blank">GitHub</a></button>
+        </div>
+        <div id="bottom" style=" grid-row: -1; z-index: -100;"></div>
     </div>
 </body>
 </html>
