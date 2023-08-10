@@ -32,6 +32,14 @@ button:focus {
     transform: translateY(-0.25em);
 }
 
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+
 .container {
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
@@ -68,14 +76,23 @@ button:focus {
     z-index: 1;
 }
 
-.container > .navBar > p,
+.container > .navBar > .libraryGrouping {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+}
+
+.container > .navBar > .libraryGrouping > p,
+.container > .navBar > .libraryGrouping > span,
 .container > .navBar button,
 .container > .navBar > .navButtons,
 .container > .navBar > .navButtons button {
     background-color: inherit;
 }
 
-.container > .navBar > p {
+.container > .navBar > .libraryGrouping > p {
     font-size: 24px;
 }
 
