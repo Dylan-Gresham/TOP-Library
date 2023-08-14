@@ -138,7 +138,13 @@ addDialogElement.addEventListener('close', event => {
     let returnTokens = addDialogElement.returnValue.split(", ");
     
     // Create book and add to library/table
-    let newBook = new Book(returnTokens[0], returnTokens[1], +returnTokens[2], returnTokens[3], +returnTokens[4]);
+    let newBook;
+    if(returnTokens[4] === '') {
+        newBook = new Book(returnTokens[0], returnTokens[1], +returnTokens[2], returnTokens[3]);
+    } else {
+        newBook = new Book(returnTokens[0], returnTokens[1], +returnTokens[2], returnTokens[3], +returnTokens[4]);
+    }
+
     addBookToLibrary(newBook);
 
     event.stopPropagation();
@@ -162,12 +168,19 @@ addButton.addEventListener('click', event => {
     let numPages = newPages.value;
     let completed = newFinished.checked;
     let ratingNum = newRating.value;
+    let requireRatingValidation = (ratingNum === '') ? false : true;
 
     // Input validation
-    if(!numPages.match(numValidationRegex) || !ratingNum.match(numValidationRegex)) {
+    if(!numPages.match(numValidationRegex)) {
         event.stopPropagation();
 
         return;
+    } else if(requireRatingValidation) {
+        if(!ratingNum.match(numValidationRegex)) {
+            event.stopPropagation();
+            
+            return;
+        }
     } else if(addTitle === '' || addAuthor === '') {
         event.stopPropagation();
 
