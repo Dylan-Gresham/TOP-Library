@@ -66,8 +66,24 @@
                             <input type="number" name="newRating" id="newRating">
                         </div>
                         <div class="buttons">
-                            <button formmethod="dialog" id="cancelButton">Cancel</button>
+                            <button formmethod="dialog" id="addCancelButton">Cancel</button>
                             <button type="submit" id="addButton">Add</button>
+                        </div>
+                    </div>
+                </form>
+            </dialog>
+            <dialog id="deleteDialog">
+                <form id="deleteDialogForm">
+                    <div class="dialogContainer">
+                        <div class="dialogLabels">
+                            <label for="deleteTitle">Title:</label>
+                        </div>
+                        <div class="dialogInputs">
+                            <input type="text" name="deleteTitle" id="deleteTitle" required>
+                        </div>
+                        <div class="buttons">
+                            <button formmethod="dialog" id="deleteCancelButton">Cancel</button>
+                            <button type="submit" id="dialogDeleteButton">Delete</button>
                         </div>
                     </div>
                 </form>

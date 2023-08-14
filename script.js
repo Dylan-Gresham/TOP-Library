@@ -22,7 +22,8 @@ const deleteButton = document.getElementById('delete');
 const clearButton = document.getElementById('clear');
 const table = document.getElementById('table');
 const tableBody = document.getElementById('tbody');
-const dialogElement = document.getElementById('addDialog');
+const addDialogElement = document.getElementById('addDialog');
+const deleteDialogElement = document.getElementById('deleteDialog');
 
 // Logic for adding a book to both the library array and the table
 function addBookToLibrary(book) {
@@ -83,7 +84,7 @@ function addBookToLibrary(book) {
 
 // Button Logic
 newButton.addEventListener('click', event => {
-    dialogElement.showModal();
+    addDialogElement.showModal();
 
     event.stopPropagation();
 });
@@ -95,72 +96,32 @@ clearButton.addEventListener('click', event => {
 });
 
 deleteButton.addEventListener('click', event => {
-    // Gets title to delete
-    let deleteTitle = prompt("What's the name of the book you want to delete?");
-    if(deleteTitle === null) {
-        event.stopPropagation();
-
-        return;
-    } else {
-        deleteTitle = deleteTitle.trim();
-    }
-
-    while(deleteTitle === undefined || deleteTitle === "") {
-        deleteTitle = prompt("What's the name of the book you want to delete?");
-        if(deleteTitle === null) {
-            event.stopPropagation();
-
-            return;
-        } else {
-            deleteTitle = deleteTitle.trim();
-        }
-    }
-
-    // Finds index in library
-    let oldLength = library.length;
-    let i = 0;
-    for(i = 0; i < library.length + 1; i++) {
-        if(library[i].title === deleteTitle) {
-            library.splice(i, 1);
-            break;
-        }
-    }
-
-    if(i === oldLength) {
-        event.stopPropagation();
-        
-        return;
-    }
-
-    // Removes row at the found index
-    table.deleteRow(i + 1); // + 1 to correct for table vs array indexing
+    deleteDialogElement.showModal();
 
     event.stopPropagation();
 });
 
 /* Adding Dialog Form Logic: */
 // Get elements of the dialog
-const dialogForm = document.getElementById('addDialogForm');
 const newTitle = document.getElementById('newTitle');
 const newAuthor = document.getElementById('newAuthor');
 const newPages = document.getElementById('newPages');
 const newFinished = document.getElementById('newFinished');
 const newRating = document.getElementById('newRating');
 const addButton = document.getElementById('addButton');
-const cancelButton = document.getElementById('cancelButton');
-
+const addCancelButton = document.getElementById('addCancelButton');
 
 // Cancel button triggers close event, book will be created and added here.
-dialogElement.addEventListener('close', event => {
+addDialogElement.addEventListener('close', event => {
     // Handle if the dialog is canceled and not "submitted"
-    if(dialogElement.returnValue === "") {
+    if(addDialogElement.returnValue === "") {
         event.stopPropagation();
 
         return;
     }
 
     // Create array of return values
-    let returnTokens = dialogElement.returnValue.split(", ");
+    let returnTokens = addDialogElement.returnValue.split(", ");
     
     // Create book and add to library/table
     let newBook = new Book(returnTokens[0], returnTokens[1], +returnTokens[2], returnTokens[3], +returnTokens[4]);
@@ -170,8 +131,8 @@ dialogElement.addEventListener('close', event => {
 });
 
 // Implement explicit cancel button logic to override the required attributes
-cancelButton.addEventListener('click', event => {
-    dialogElement.close(); // No parameters with the close function so that the dialogElement listener catches it
+addCancelButton.addEventListener('click', event => {
+    addDialogElement.close(); // No parameters with the close function so that the dialogElement listener catches it
 
     event.stopPropagation();
 });
@@ -179,28 +140,113 @@ cancelButton.addEventListener('click', event => {
 // Validate then "Submit" the information entered.
 addButton.addEventListener('click', event => {
     event.preventDefault(); // Stops submission to page itself
-    const numValidationRegex = /^[0-9]+$/;
+    const numValidationRegex = /^[0-9]+$/; // Define validation regex
 
+    // Placeholder variables
+    let addTitle = newTitle.value.trim();
+    let addAuthor = newAuthor.value.trim();
     let numPages = newPages.value;
+    let completed = newFinished.checked;
     let ratingNum = newRating.value;
 
-    if(!numPages.match(numValidationRegex)) {
+    // Input validation
+    if(!numPages.match(numValidationRegex) || !ratingNum.match(numValidationRegex)) {
         event.stopPropagation();
 
         return;
-    } else if(!ratingNum.match(numValidationRegex)) {
+    } else if(addTitle === '' || addAuthor === '') {
         event.stopPropagation();
 
         return;
     }
 
     // Close the dialog and "submit" the information
-    dialogElement.close(`${newTitle.value}, ${newAuthor.value}, ${numPages}, ${newFinished.checked}, ${ratingNum}`);
+    newTitle.value = '';
+    newAuthor.value = '';
+    newPages.value = '';
+    newFinished.checked = false;
+    newRating.value = '';
+    addDialogElement.close(`${addTitle}, ${addAuthor}, ${numPages}, ${completed}, ${ratingNum}`);
+
+    event.stopPropagation();
+});
+
+addDialogElement.addEventListener('keypress', event => {
+    if(event.key === 'Enter') {
+        addButton.click();
+    }
 
     event.stopPropagation();
 });
 
 /* Deletion Dialog Form Logic: */
 // Get elements of the dialog
+const deleteTitle = document.getElementById('deleteTitle');
+const dialogDeleteButton = document.getElementById('dialogDeleteButton');
+const deleteCancelButton = document.getElementById('deleteCancelButton');
 
 // Cancel button triggers close event, book will be found and deleted here.
+deleteDialogElement.addEventListener('close', event => {
+    let delTitle = deleteDialogElement.returnValue; // Get title from the form
+
+    // Handle if the form is canceled
+    if(delTitle === '') {
+        event.stopPropagation();
+
+        return;
+    }
+
+    // Finds index in library
+    let oldLength = library.length;
+    if(oldLength !== 0) {
+        let i = 0;
+        for(i = 0; i < library.length + 1; i++) {
+            if(library[i].title === delTitle) { // if found
+                library.splice(i, 1); // Remove from the library array
+                table.deleteRow(i + 1); // + 1 to correct for table vs array indexing
+                break; // Exit the loop
+            }
+        }
+    }
+
+    // Alert if nothing was found
+    if(oldLength === library.length) {
+        alert(`A book matching the title ${delTitle} was not found in the library. Nothing has been removed.`);
+    }
+
+    event.stopPropagation();
+});
+
+// Implement explicit cancel button logic to override the required attributes
+deleteCancelButton.addEventListener('click', event => {
+    deleteDialogElement.close();
+
+    event.stopPropagation();
+});
+
+deleteButton.addEventListener('click', event => {
+    event.preventDefault(); // Prevent actual submission
+
+    // Get the title with no leading or trailing whitespace
+    let delTitle = deleteTitle.value.trim();
+
+    // Validate something was entered other than just whitespace
+    if(delTitle === '') {
+        event.stopPropagation();
+
+        return;
+    }
+
+    deleteTitle.value = '';
+    deleteDialogElement.close(delTitle);
+
+    event.stopPropagation();
+});
+
+deleteDialogElement.addEventListener('keypress', event => {
+    if(event.key === 'Enter') {
+        deleteButton.click();
+    }
+
+    event.stopPropagation();
+});
