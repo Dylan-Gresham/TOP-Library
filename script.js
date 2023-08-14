@@ -71,12 +71,24 @@ function addBookToLibrary(book) {
     const newRating = document.createElement('td');
     newRating.textContent = book.rating;
 
+    const newDeleteTD = document.createElement('td');
+    const newDeleteButton = document.createElement('button');
+    newDeleteButton.setAttribute('value', library.length);
+    newDeleteButton.classList.add('tableRemove');
+    newDeleteButton.textContent = 'Delete';
+    newDeleteButton.addEventListener('click', event => {
+        library.splice(newDeleteButton.getAttribute('value'), 1);
+        table.deleteRow(newDeleteButton.getAttribute('value'));
+    });
+    newDeleteTD.appendChild(newDeleteButton);
+
     // Add table cells to table row
     newRow.appendChild(newTitle);
     newRow.appendChild(newAuthor);
     newRow.appendChild(newPages);
     newRow.appendChild(newRead);
     newRow.appendChild(newRating);
+    newRow.appendChild(newDeleteTD);
 
     // Add table row to table body
     tableBody.appendChild(newRow);
