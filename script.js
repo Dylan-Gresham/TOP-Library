@@ -69,7 +69,24 @@ function addBookToLibrary(book) {
     newRead.appendChild(newCheckButton);
 
     const newRating = document.createElement('td');
-    newRating.textContent = book.rating;
+    newRating.setAttribute('value', library.length);
+    const newRatingTextField = document.createElement('div');
+    newRatingTextField.setAttribute('contenteditable', 'true');
+    newRatingTextField.style = "background-color: inherit;"
+    newRatingTextField.textContent = book.rating;
+    newRatingTextField.addEventListener('keypress', event => {
+        if(!event.key.match(/^[0-9]+$/) || newRatingTextField.textContent.length >= 3) {
+            event.preventDefault();
+        }
+
+        if(+newRatingTextField.textContent > 100) {
+            newRatingTextField.textContent = 100;
+        }
+
+        book.rating = +newRatingTextField.textContent;
+    });
+    newRating.appendChild(newRatingTextField);
+
 
     const newDeleteTD = document.createElement('td');
     const newDeleteButton = document.createElement('button');
