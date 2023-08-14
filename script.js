@@ -2,18 +2,20 @@
 let library = [];
 
 // Create Book object constructor
-function Book(title, author, pages, read = false, rating = 'N/A') {
-    // Input validation
-    read = (read === "true") ? true : false;
-    
-    // Set values
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    this.rating = rating;
+class Book {
+    constructor(title, author, pages, read = false, rating = 'N/A') {
+        // Input validation
+        read = (read === "true") ? true : false;
 
-    return;
+        // Set values
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+        this.rating = rating;
+
+        return;
+    }
 }
 
 // Get elements
@@ -132,7 +134,7 @@ addDialogElement.addEventListener('close', event => {
 
 // Implement explicit cancel button logic to override the required attributes
 addCancelButton.addEventListener('click', event => {
-    addDialogElement.close(); // No parameters with the close function so that the dialogElement listener catches it
+    addDialogElement.close(''); // No parameters with the close function so that the dialogElement listener catches it
 
     event.stopPropagation();
 });
@@ -219,7 +221,7 @@ deleteDialogElement.addEventListener('close', event => {
 
 // Implement explicit cancel button logic to override the required attributes
 deleteCancelButton.addEventListener('click', event => {
-    deleteDialogElement.close();
+    deleteDialogElement.close('');
 
     event.stopPropagation();
 });
