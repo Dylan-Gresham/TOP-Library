@@ -42,11 +42,36 @@
                         <th>Author</th>
                         <th>Pages</th>
                         <th>Finished?</th>
+                        <th>Rating</th>
                     </tr>
                 </thead>
                 <tbody id="tbody">
                 </tbody>
             </table>
+            <dialog id="addDialog">
+                <form id="addDialogForm">
+                    <div class="dialogContainer">
+                        <div class="dialogLabels">
+                            <label for="newTitle">Title:</label>
+                            <label for="newAuthor">Author:</label>
+                            <label for="newPages">Number of Pages:</label>
+                            <label for="newFinished">Completion Status:</label>
+                            <label for="newRating">Rating (0-100):</label>
+                        </div>
+                        <div class="dialogInputs">
+                            <input type="text" name="newTitle" id="newTitle" required>
+                            <input type="text" name="newAuthor" id="newAuthor" required>
+                            <input type="number" name="newPages" id="newPages" required>
+                            <input type="checkbox" name="newFinished" id="newFinished">
+                            <input type="number" name="newRating" id="newRating">
+                        </div>
+                        <div class="buttons">
+                            <button formmethod="dialog" id="cancelButton">Cancel</button>
+                            <button type="submit" id="addButton">Add</button>
+                        </div>
+                    </div>
+                </form>
+            </dialog>
         </div>
         <div class="footer">
             <button type="button" class="footerButton"><a href="https://github.com/Dylan-Gresham" target="_blank">GitHub</a></button>
