@@ -43,6 +43,7 @@
                         <th>Pages</th>
                         <th>Finished?</th>
                         <th>Rating</th>
+                        <th>&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody id="tbody">
@@ -57,22 +58,24 @@
     <dialog id="addDialog">
         <form id="addDialogForm">
             <div class="dialogContainer">
-                <div class="dialogLabels">
-                    <label for="newTitle">Title:</label>
-                    <label for="newAuthor">Author:</label>
-                    <label for="newPages">Number of Pages:</label>
-                    <label for="newFinished">Completion Status:</label>
-                    <label for="newRating">Rating (0-100):</label>
-                </div>
-                <div class="dialogInputs">
-                    <input type="text" name="newTitle" id="newTitle" required>
-                    <input type="text" name="newAuthor" id="newAuthor" required>
-                    <input type="number" name="newPages" id="newPages" required>
-                    <input type="checkbox" name="newFinished" id="newFinished">
-                    <input type="number" name="newRating" id="newRating">
+                <div class="labsAndIns">
+                    <div class="dialogLabels">
+                        <label for="newTitle">Title*</label>
+                        <label for="newAuthor">Author*</label>
+                        <label for="newPages">Number of Pages*</label>
+                        <label for="newFinished">Completion Status</label>
+                        <label for="newRating">Rating (0-100)</label>
+                    </div>
+                    <div class="dialogInputs">
+                        <input type="text" name="newTitle" id="newTitle" required>
+                        <input type="text" name="newAuthor" id="newAuthor" required>
+                        <input type="number" name="newPages" id="newPages" required>
+                        <input type="checkbox" name="newFinished" id="newFinished">
+                        <input type="number" name="newRating" id="newRating">
+                    </div>
                 </div>
                 <div class="buttons">
-                    <button formmethod="dialog" id="addCancelButton">Cancel</button>
+                    <button type="reset" formmethod="dialog" id="addCancelButton">Cancel</button>
                     <button type="submit" id="addButton">Add</button>
                 </div>
             </div>
@@ -81,14 +84,16 @@
     <dialog id="deleteDialog">
         <form id="deleteDialogForm">
             <div class="dialogContainer">
-                <div class="dialogLabels">
-                    <label for="deleteTitle">Title:</label>
-                </div>
-                <div class="dialogInputs">
-                    <input type="text" name="deleteTitle" id="deleteTitle" required>
+                <div class="labsAndIns">
+                    <div class="dialogLabels">
+                        <label for="deleteTitle">Title*</label>
+                    </div>
+                    <div class="dialogInputs">
+                        <input type="text" name="deleteTitle" id="deleteTitle" required>
+                    </div>
                 </div>
                 <div class="buttons">
-                    <button formmethod="dialog" id="deleteCancelButton">Cancel</button>
+                    <button type="reset" formmethod="dialog" id="deleteCancelButton">Cancel</button>
                     <button type="submit" id="dialogDeleteButton">Delete</button>
                 </div>
             </div>

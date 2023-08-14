@@ -40,6 +40,13 @@ button:focus {
   'opsz' 48
 }
 
+.tableRemove {
+    border: 2px solid var(--border-color);
+    border-radius: 3px;
+    background-color: #242424;
+    font-family: inherit;
+}
+
 .container {
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
@@ -167,9 +174,13 @@ button:focus {
 .container > .booksContainer > .booksTable > tbody td {
     padding: 6px;
     font-size: 14px;
+    text-align: center;
+    align-content: center;
 }
 
-.container > .booksContainer > .booksTable > tbody tr td > input[type="checkbox"].readButton {
+
+.container > .booksContainer > .booksTable > tbody tr td > input[type="checkbox"].readButton,
+#addDialog > #addDialogForm > .dialogContainer > .labsAndIns > .dialogInputs > #newFinished {
     appearance: none;
     border: 2px solid var(--border-color);
     outline: none;
@@ -177,7 +188,7 @@ button:focus {
     width: 1.5rem;
     cursor: pointer;
     background-color: inherit;
-    margin: 0;
+    margin: 0 0 0 43%;
     font: inherit;
     color: inherit;
     border-radius: 3px;
@@ -185,7 +196,8 @@ button:focus {
     place-content: center;
 }
 
-.container > .booksContainer > .booksTable > tbody tr td > input[type="checkbox"].readButton::before {
+.container > .booksContainer > .booksTable > tbody tr td > input[type="checkbox"].readButton::before,
+#addDialog > #addDialogForm > .dialogContainer > .labsAndIns > .dialogInputs > #newFinished::before {
     content: "";
     width: 0.8rem;
     height: 0.8rem;
@@ -194,7 +206,8 @@ button:focus {
     box-shadow: inset 1em 1em var(--background-inner);
 }
 
-.container > .booksContainer > .booksTable > tbody tr td > input[type="checkbox"].readButton:checked::before {
+.container > .booksContainer > .booksTable > tbody tr td > input[type="checkbox"].readButton:checked::before,
+#addDialog > #addDialogForm > .dialogContainer > .labsAndIns > .dialogInputs > #newFinished:checked::before {
     transform: scale(1);
 }
 
@@ -212,4 +225,78 @@ button:focus {
 
 .container > .footer > .footerButton {
     border: none;
+}
+
+#addDialog {
+    width: clamp(10vw, 30vw, 35vw);
+    height: clamp(16vh, 36vh, 41vh);
+}
+
+dialog::backdrop {
+    backdrop-filter: blur(3px) brightness(50%);
+}
+
+#addDialog > #addDialogForm > .dialogContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 9fr 1fr;
+}
+
+#deleteDialog > #deleteDialogForm > .dialogContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+dialog > form > .dialogContainer > .labsAndIns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+}
+
+dialog > form > .dialogContainer > .labsAndIns > .dialogLabels,
+dialog > form > .dialogContainer > .labsAndIns > .dialogInputs {
+    display: flex;
+    flex-direction: column;
+}
+
+dialog > form > .dialogContainer > .labsAndIns > .dialogLabels {
+    text-align: right;
+    gap: 6px;
+}
+
+dialog > form > .dialogContainer > .labsAndIns > .dialogInputs {
+    gap: 6px;
+}
+
+dialog > form > .dialogContainer > .labsAndIns > .dialogInputs input[type=text],
+dialog > form > .dialogContainer > .labsAndIns > .dialogInputs input[type=number] {
+    outline: none;
+    padding: 2px 4px;
+    border: 2px solid var(--border-color);
+    border-radius: 3px;
+}
+
+dialog > form > .dialogContainer > .labsAndIns > .dialogLabels label {
+    font-size: 18px;
+    font-weight: 900;
+}
+
+#addDialog > #addDialogForm > .dialogContainer > .labsAndIns > .dialogInputs > #newFinished {
+    align-self: start;
+}
+
+dialog > form > .dialogContainer > .buttons {
+    justify-self: center;
+    display: flex;
+    gap: 8px;
+}
+
+dialog > form > .dialogContainer > .buttons button {
+    border: 2px solid var(--border-color);
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: 700;
 }
